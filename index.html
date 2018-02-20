@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="https://vignette.wikia.nocookie.net/disney/images/2/21/Star_Wars_logo.png/revision/latest?cb=20170909202326"
+  />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+  <title>Star Wars Battlegrounds</title>
+</head>
+
+<body onload="playStarWarsBattlegrounds();">
+
+  <div class="container-fluid">
+
+    <header class="text-center">
+      <h1>Star Wars Battlegrounds</h1>
+    </header>
+
+    <div class="container" id="main-content">
+
+      <div class="row" id="fighting-section">
+        <div class="col-md-4 text-center" id="fighter-1-space">
+          <img src="assets/images/mace-windu.png">
+          <h3>Mace Windu</h3>
+        </div>
+        <div class="col-md-4 text-center" id="vs-box">
+          <button class="btn btn-primary" id="attack-button">Attack!</button>
+        </div>
+        <div class="col-md-4 text-center" id="fighter-2-space">
+          <img src="assets/images/darth-vader.jpg">
+          <h3>Darth Vader</h3>
+        </div>
+      </div>
+
+      <div class="row" id="battle-log-section">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" id="battle-log"></div>
+        <div class="col-md-3"></div>
+      </div>
+
+    </div>
+
+    <div class="row" id="character-selection-section">
+      <div class="col-md-6 text-center" id="jedi-section">
+        <h2>Jedi</h2>
+        <div id="jedi-images">
+          <img src="assets/images/luke-skywalker.jpg">
+          <img src="assets/images/obi-wan.jpg">
+          <img src="assets/images/han-solo.jpg">
+          <img src="assets/images/rey.jpg">
+          <img src="assets/images/finn.jpg">
+        </div>
+      </div>
+      <div class="col-md-6 text-center" id="sith-section">
+        <h2>Sith</h2>
+        <div id="sith-images">
+          <img src="assets/images/darth-maul.jpg">
+          <img src="assets/images/darth-vader.jpg">
+          <img src="assets/images/emperor-palpatine.jpg">
+          <img src="assets/images/snoke.jpg">
+          <img src="assets/images/kylo-ren.jpg">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="assets/javascript/game.js"></script>
+
+</body>
+
+</html>

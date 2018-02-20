@@ -1,0 +1,65 @@
+html, body, .container-fluid {
+  height: 100%;
+}
+body {
+  background: url('../images/space.jpg');
+  color: white;
+}
+header {
+  height: 10%;
+}
+h1 {
+  font-size: 4em;
+  margin-top: -10px;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+#main-content {
+  height: 60%;
+}
+#fighting-section {
+  height: 85%;
+}
+#battle-log-section {
+  height: 15%;
+}
+#character-selection-section {
+  height: 30%;
+}
+#fighter-1-space > img{
+  width:100%;
+  border-radius: 5px;
+  box-shadow: 3px 3px 1em blue, -3px -3px 1em blue;
+} 
+#fighter-2-space > img {
+  width:100%;
+  border-radius: 5px;
+  box-shadow: 3px 3px 1em red, -3px -3px 1em red;
+}
+#vs-box {
+  background-image: url("../images/crossed-lightsabers.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-y: 30%;
+}
+#attack-button {
+  margin-top: 45%;
+  width: 50%;
+  height: 10%;
+  font-size: 1.4em;
+  padding-top: 0;
+}
+#lightsabers-img {
+  width: 100%;
+  padding-top: 10%;
+}
+#battle-log {
+  border-top: 4px dashed white;
+  border-bottom: 4px dashed white;
+}
+#jedi-images > img {
+  width: 100px;
+} 
+#sith-images > img {
+  width: 100px;
+}
