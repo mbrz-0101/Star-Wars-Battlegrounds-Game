@@ -13,27 +13,30 @@
   <title>Star Wars Battlegrounds</title>
 </head>
 
+<!-- Body runs js game on load -->
 <body onload="playStarWarsBattlegrounds();">
 
   <div class="container-fluid">
 
+    <!-- Header -->
     <header class="text-center">
       <h1>Star Wars Battlegrounds</h1>
     </header>
 
+    <!-- Main Fighting Space -->
     <div class="container" id="main-content">
 
       <div class="row" id="fighting-section">
-        <div class="col-md-4 text-center" id="fighter-1-space">
-          <img src="assets/images/mace-windu.png">
-          <h3>Mace Windu</h3>
+        <div class="col-md-4 text-center" id="jedi-space">
+          <img src="assets/images/mace-windu.png" id="jedi-fighter-image">
+          <h3 id="jedi-fighter-name">Mace Windu</h3>
         </div>
         <div class="col-md-4 text-center" id="vs-box">
           <button class="btn btn-primary" id="attack-button">Attack!</button>
         </div>
-        <div class="col-md-4 text-center" id="fighter-2-space">
-          <img src="assets/images/darth-vader.jpg">
-          <h3>Darth Vader</h3>
+        <div class="col-md-4 text-center" id="sith-space">
+          <img src="assets/images/darth-vader.jpg" id="sith-fighter-image">
+          <h3 id="sith-fighter-name">Darth Vader</h3>
         </div>
       </div>
 
@@ -45,33 +48,39 @@
 
     </div>
 
+    <!-- Character Selection Section -->
     <div class="row" id="character-selection-section">
       <div class="col-md-6 text-center" id="jedi-section">
         <h2>Jedi</h2>
         <div id="jedi-images">
-          <img src="assets/images/luke-skywalker.jpg">
-          <img src="assets/images/obi-wan.jpg">
-          <img src="assets/images/han-solo.jpg">
-          <img src="assets/images/rey.jpg">
-          <img src="assets/images/finn.jpg">
+          <img src="assets/images/mace-windu.png" id="windu">
+          <img src="assets/images/luke-skywalker.jpg" id="luke">
+          <img src="assets/images/obi-wan.jpg" id="obiwan">
+          <img src="assets/images/han-solo.jpg" id="solo">
+          <img src="assets/images/rey.jpg" id="rey">
+          <img src="assets/images/finn.jpg" id="finn">
         </div>
       </div>
       <div class="col-md-6 text-center" id="sith-section">
         <h2>Sith</h2>
         <div id="sith-images">
-          <img src="assets/images/darth-maul.jpg">
-          <img src="assets/images/darth-vader.jpg">
-          <img src="assets/images/emperor-palpatine.jpg">
-          <img src="assets/images/snoke.jpg">
-          <img src="assets/images/kylo-ren.jpg">
+          <img src="assets/images/darth-maul.jpg" id="maul">
+          <img src="assets/images/darth-vader.jpg" id="vader">
+          <img src="assets/images/emperor-palpatine.jpg" id="palpatine">
+          <img src="assets/images/snoke.jpg" id="snoke">
+          <img src="assets/images/kylo-ren.jpg" id="kylo">
+          <img src="assets/images/count-dooku.jpg" id="dooku">
         </div>
       </div>
     </div>
 
   </div>
 
+  <!-- jQuery link -->
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+
+  <!-- Link to javascript game -->
   <script src="assets/javascript/game.js"></script>
 
 </body>

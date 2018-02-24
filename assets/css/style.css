@@ -26,12 +26,12 @@ h1 {
 #character-selection-section {
   height: 30%;
 }
-#fighter-1-space > img{
-  width:100%;
+#jedi-space > img {
+  width: 100%;
   border-radius: 5px;
   box-shadow: 3px 3px 1em blue, -3px -3px 1em blue;
-} 
-#fighter-2-space > img {
+}
+#sith-space > img {
   width:100%;
   border-radius: 5px;
   box-shadow: 3px 3px 1em red, -3px -3px 1em red;
@@ -59,7 +59,15 @@ h1 {
 }
 #jedi-images > img {
   width: 100px;
+  margin: 5px;
+  display: inline;
 } 
 #sith-images > img {
   width: 100px;
+  margin: 5px;
+  display: inline;
+}
+.active {
+  box-shadow: 3px 3px 1em red, -3px -3px 1em red;
+  transition: .2s;
 }
