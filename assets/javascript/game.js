@@ -1,9 +1,10 @@
 function playStarWarsBattlegrounds() {
 
   class Fighter {
-    constructor(name, imgSrc, health = 100, attack = 10, defense = 15) {
+    constructor(name, imgSrc, jedi = true, health = 100, attack = 10, counterAttack = 5) {
       this.name = name;
       this.imgSrc = imgSrc;
+      this.jedi = jedi;
       this.health = health;
       this.attack = attack;
       this.defense = defense;
@@ -16,12 +17,12 @@ function playStarWarsBattlegrounds() {
   const solo = new Fighter("Han Solo", "assets/images/han-solo.jpg");
   const rey = new Fighter("Rey", "assets/images/rey.jpg");
   const finn = new Fighter("Finn", "assets/images/finn.jpg");
-  const maul = new Fighter("Darth Maul", "assets/images/darth-maul.jpg");
-  const vader = new Fighter("Darth Vader", "assets/images/darth-vader.jpg");
-  const palpatine = new Fighter("Emperor Palpatine", "assets/images/emperor-palpatine.jpg");
-  const snoke = new Fighter("Dark Lord Snoke", "assets/images/snoke.jpg");
-  const kylo = new Fighter("Kylo Ren", "assets/images/kylo-ren.jpg");
-  const dooku = new Fighter("Count Dooku", "assets/images/count-dooku.jpg");
+  const maul = new Fighter("Darth Maul", "assets/images/darth-maul.jpg", false);
+  const vader = new Fighter("Darth Vader", "assets/images/darth-vader.jpg", false);
+  const palpatine = new Fighter("Emperor Palpatine", "assets/images/emperor-palpatine.jpg", false);
+  const snoke = new Fighter("Dark Lord Snoke", "assets/images/snoke.jpg", false);
+  const kylo = new Fighter("Kylo Ren", "assets/images/kylo-ren.jpg", false);
+  const dooku = new Fighter("Count Dooku", "assets/images/count-dooku.jpg", false);
 
   let charactersObject = {
     "windu": windu,
@@ -37,41 +38,81 @@ function playStarWarsBattlegrounds() {
     "kylo": kylo,
     "dooku": dooku
   };
-  console.log(charactersObject);
 
   let attacker, defender;
 
-  // Set fighter imamges and names to null
-  $("#jedi-fighter-image").attr("src", "https://placehold.it/600x600");
-  $("#jedi-fighter-name").text("");
-  $("#sith-fighter-image").attr("src", "https://placehold.it/600x600");
-  $("#sith-fighter-name").text("");
+  let defenderHistory = [];
+
+
+  // Set fight function for Attack! button
+  $("#attack-button").on('click', fight);
+
+  // Hide battle log space until character is selected 
+  $("#battle-log-section").hide();
+  $("#attack-button").hide();
 
   // Set background hover on character selection images
   $("#character-selection-section").find("img").on('mouseenter', highlightImage);
   $("#character-selection-section").find("img").on('mouseleave', removeImageHighlight);
 
   // Set fighter image on character selection
-  $("#character-selection-section").find("img").on('click', moveCharacterImgToFighterSpace);
+  $("#character-selection-section").find("img").on('click', moveCharacterToFighterSpace);
+
+  // Hide select button after character is picked
+  $("#character-select-button").on('click', hideSelectButton);
 
 
   function highlightImage(event) {
-    $(event.target).attr("class", "active");
-
+    let parent = $(event.target).parent();
+    if (parent[0].id === "jedi-images") {
+      $(event.target).attr("class", "active-jedi");
+    } else {
+      $(event.target).attr("class", "active-sith");
+    }
   }
   function removeImageHighlight(event) {
     $(event.target).removeAttr("class");
   }
-  function moveCharacterImgToFighterSpace(event) {
+  function moveCharacterToFighterSpace(event) {
     let chosenCharacter = charactersObject[$(event.target)[0].id];
-
-    console.log(chosenCharacter);
-
-
-    
+    $("#jedi-fighter-image").attr("src", chosenCharacter.imgSrc);
+    $("#character-select-button").show();
+    $("#jedi-fighter-name").text(chosenCharacter.name);
+    attacker = chosenCharacter;
+    if (!chosenCharacter.jedi) {
+      $("#jedi-space").find("img").css("box-shadow", "3px 3px 1em red, -3px -3px 1em red");
+      $("#sith-space").find("img").css("box-shadow", "3px 3px 1em blue, -3px -3px 1em blue");
+      $("#vs-box").css("background-image", "url('assets/images/crossed-lightsabers.png')");
+    } else {
+      $("#jedi-space").find("img").css("box-shadow", "3px 3px 1em blue, -3px -3px 1em blue");
+      $("#sith-space").find("img").css("box-shadow", "3px 3px 1em red, -3px -3px 1em red");
+      $("#vs-box").css("background-image", "url('assets/images/crossed-lightsabers-2.png')");
+    }
   }
-
-
+  function hideSelectButton(event) {
+    $(event.target).css("display", "none");
+    $("#character-selection-section").css("display", "none");
+    $("#battle-log-section").show();
+    stageFight();
+  }
+  function stageFight() {
+    for (var prop in charactersObject) {
+      let opponent = charactersObject[prop];
+      if (attacker.jedi && !opponent.jedi) {
+        defender = opponent;
+        defenderHistory.push(defender);
+        $("#sith-fighter-image").attr("src", opponent.imgSrc);
+        $("#sith-fighter-name").text(defender.name);
+        $("#attack-button").show();
+      }
+    }
+  }
+  function fight() {
+    if (attacker && defender) {
+      alert("hi");
+      
+    }
+  }
 
 
 

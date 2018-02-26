@@ -19,9 +19,11 @@ h1 {
 }
 #fighting-section {
   height: 85%;
+  margin-top: 5%;
 }
 #battle-log-section {
-  height: 15%;
+  height: 25%;
+  margin-top: 5%;
 }
 #character-selection-section {
   height: 30%;
@@ -37,7 +39,7 @@ h1 {
   box-shadow: 3px 3px 1em red, -3px -3px 1em red;
 }
 #vs-box {
-  background-image: url("../images/crossed-lightsabers.png");
+  background-image: url("../images/crossed-lightsabers-2.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position-y: 30%;
@@ -67,7 +69,11 @@ h1 {
   margin: 5px;
   display: inline;
 }
-.active {
+.active-jedi {
+  box-shadow: 3px 3px 1em blue, -3px -3px 1em blue;
+  transition: .2s;
+}
+.active-sith {
   box-shadow: 3px 3px 1em red, -3px -3px 1em red;
   transition: .2s;
 }
