@@ -29,24 +29,36 @@
 
       <div class="row" id="fighting-section">
         <div class="col-md-4 text-center" id="jedi-space">
+          <h1 id="choose-character-message">Choose your character</h1>
           <img src="" id="jedi-fighter-image">
           <h3 id="jedi-fighter-name"></h3>
+          <h4 id="jedi-health-points"></h4>
         </div>
+
         <div class="col-md-4 text-center" id="vs-box">
           <button class="btn btn-primary" id="attack-button">Attack!</button>
         </div>
+
         <div class="col-md-4 text-center" id="sith-space">
+          <h1 id="select-opponent-message" style="visibility: hidden;">Select your opponent</h1>
           <img src="" id="sith-fighter-image">
           <h3 id="sith-fighter-name"></h3>
+          <h4 id="sith-health-points"></h4>
         </div>
       </div>
+
       <div class="col-md-12 text-center" id="select-button-box">
         <button class="btn btn-primary" id="character-select-button" style="display: none;">Select</button>
       </div>
+
       <div class="row" id="battle-log-section">
         <div class="col-md-3"></div>
         <div class="col-md-6" id="battle-log"></div>
         <div class="col-md-3"></div>
+      </div>
+
+      <div class="col-md-12 text-center" id="select-button-box">
+        <button class="btn btn-primary" id="next-opponent-button" style="display: none;">Next Opponent</button>
       </div>
 
     </div>

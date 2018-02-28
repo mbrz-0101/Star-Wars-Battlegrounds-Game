@@ -1,13 +1,14 @@
 function playStarWarsBattlegrounds() {
 
   class Fighter {
-    constructor(name, imgSrc, jedi = true, health = 100, attack = 10, counterAttack = 5) {
+    constructor(name, imgSrc, jedi = true, health = 100, baseAttack = 10, attack = 10, counterAttack = 5) {
       this.name = name;
       this.imgSrc = imgSrc;
       this.jedi = jedi;
       this.health = health;
+      this.baseAttack = baseAttack;
       this.attack = attack;
-      this.defense = defense;
+      this.counterAttack = counterAttack;
     }
   }
 
@@ -48,18 +49,20 @@ function playStarWarsBattlegrounds() {
   $("#attack-button").on('click', fight);
 
   // Hide battle log space until character is selected 
-  $("#battle-log-section").hide();
+  $("#battle-log").hide();
   $("#attack-button").hide();
 
   // Set background hover on character selection images
   $("#character-selection-section").find("img").on('mouseenter', highlightImage);
-  $("#character-selection-section").find("img").on('mouseleave', removeImageHighlight);
+  $("#character-selection-section").find("img").on('mouseleave', (removeImageHighlight));
 
   // Set fighter image on character selection
-  $("#character-selection-section").find("img").on('click', moveCharacterToFighterSpace);
+  $("#character-selection-section").find("img").on('click', moveCharacterToAttackerSpace);
 
   // Hide select button after character is picked
   $("#character-select-button").on('click', hideSelectButton);
+
+  $("#next-opponent-button").on('click', selectNextOpponent);
 
 
   function highlightImage(event) {
@@ -73,16 +76,37 @@ function playStarWarsBattlegrounds() {
   function removeImageHighlight(event) {
     $(event.target).removeAttr("class");
   }
-  function moveCharacterToFighterSpace(event) {
-    let chosenCharacter = charactersObject[$(event.target)[0].id];
-    $("#jedi-fighter-image").attr("src", chosenCharacter.imgSrc);
+  function moveCharacterToDefenderSpace(event) {
+    defender = charactersObject[$(event.target)[0].id];
+    defenderHistory.push(defender);
+    $("#select-opponent-message").text("");
+    $("#sith-space").css("border", "none");
+    $("#sith-space").css("background-color", "rgba(80, 80, 80, 0)");
+    $("#sith-fighter-image").attr("src", defender.imgSrc);
+    $("#sith-fighter-name").text(defender.name);
+    $("#sith-health-points").text("HP: " + defender.health);
+    $("#character-select-button").unbind("click");
+    $("#character-select-button").on('click', () => {
+      $("#character-select-button").css("display", "none");
+      $("#character-selection-section").css("display", "none");
+      $("#attack-button").show();
+      $("#battle-log").show();
+    });
+  }
+  function moveCharacterToAttackerSpace(event) {
+    attacker = charactersObject[$(event.target)[0].id];
+    $("#choose-character-message").text("");
+    $("#jedi-space").css("border", "none");
+    $("#jedi-space").css("background-color", "rgba(80, 80, 80, 0)");
+    $("#jedi-fighter-image").attr("src", attacker.imgSrc);
     $("#character-select-button").show();
-    $("#jedi-fighter-name").text(chosenCharacter.name);
-    attacker = chosenCharacter;
-    if (!chosenCharacter.jedi) {
+    $("#jedi-fighter-name").text(attacker.name);
+    $("#jedi-health-points").text("HP: " + attacker.health);
+    if (!attacker.jedi) {
       $("#jedi-space").find("img").css("box-shadow", "3px 3px 1em red, -3px -3px 1em red");
       $("#sith-space").find("img").css("box-shadow", "3px 3px 1em blue, -3px -3px 1em blue");
       $("#vs-box").css("background-image", "url('assets/images/crossed-lightsabers.png')");
+      
     } else {
       $("#jedi-space").find("img").css("box-shadow", "3px 3px 1em blue, -3px -3px 1em blue");
       $("#sith-space").find("img").css("box-shadow", "3px 3px 1em red, -3px -3px 1em red");
@@ -90,28 +114,61 @@ function playStarWarsBattlegrounds() {
     }
   }
   function hideSelectButton(event) {
-    $(event.target).css("display", "none");
-    $("#character-selection-section").css("display", "none");
-    $("#battle-log-section").show();
-    stageFight();
-  }
-  function stageFight() {
-    for (var prop in charactersObject) {
-      let opponent = charactersObject[prop];
-      if (attacker.jedi && !opponent.jedi) {
-        defender = opponent;
-        defenderHistory.push(defender);
-        $("#sith-fighter-image").attr("src", opponent.imgSrc);
-        $("#sith-fighter-name").text(defender.name);
-        $("#attack-button").show();
-      }
+    if (attacker.jedi) {
+      $("#jedi-section").css("visibility", "hidden");
+      $("#sith-section").find("img").unbind('click');
+      $("#sith-section").find("img").on('click', moveCharacterToDefenderSpace);
+    } else if (!attacker.jedi) {
+      $("#sith-section").css("visibility", "hidden");
+      $("#jedi-section").find("img").unbind('click');
+      $("#jedi-section").find("img").on('click', moveCharacterToDefenderSpace);
     }
+    $("#select-opponent-message").css("visibility", "visible");
   }
   function fight() {
     if (attacker && defender) {
-      alert("hi");
-      
+      defender.health = defender.health - attacker.attack;
+      attacker.health = attacker.health - defender.counterAttack;
+      $("#jedi-health-points").text("HP: " + attacker.health);
+      $("#sith-health-points").text("HP: " + defender.health);
+      $("#battle-log").text("You hit " + defender.name + " for " + attacker.attack + "damage. " + defender.name + " hit you back for " + defender.counterAttack + " damage.");
+      attacker.attack = attacker.attack + attacker.baseAttack;
+
+      if (defender.health <= 0) {
+        $("#attack-button").hide();
+        $("#battle-log").text("You beat " + defender.name + "!!");
+        $("#sith-health-points").text("HP: 0");
+        $("#next-opponent-button").show();
+      }
     }
+  }
+  function selectNextOpponent() {
+    $("#battle-log").text("");
+    $("#battle-log").hide();
+    $("#next-opponent-button").hide();
+    $("character-select-button").show();
+    $("#select-opponent-message").text("Choose your next opponent");
+    $("#sith-space").css("border", "4px solid rgba(94, 94, 94, 0.5)");
+    $("#sith-space").css("background-color", "rgba(80, 80, 80, 0.5)");
+    $("#sith-fighter-image").attr("src", "");
+    $("#sith-fighter-name").text("");
+    $("#sith-health-points").text("");
+    $("#character-select-button").show();
+    $("#character-select-button").on('click', () => {
+      $("#character-select-button").css("display", "none");
+      $("#character-selection-section").css("display", "none");
+      $("#attack-button").show();
+      $("#battle-log").show();
+    });
+    console.log(defenderHistory);
+    if (attacker.jedi) {
+      $("#character-selection-section").show();
+      $("#sith-section").show();
+    } else if (!attacker.jedi) {
+      $("#character-selection-section").show();
+      $("#jedi-section").show();     
+    }
+
   }
 
 
@@ -135,5 +192,4 @@ function playStarWarsBattlegrounds() {
 
 
 
-  
 }
