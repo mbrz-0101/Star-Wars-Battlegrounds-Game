@@ -140,6 +140,12 @@ function playStarWarsBattlegrounds() {
         $("#sith-health-points").text("HP: 0");
         $("#next-opponent-button").show();
       }
+      if (attacker.health <= 0) {
+        $("#attack-button").hide();
+        $("#battle-log").text("You lose");
+        $("#restart-button").show();
+        $("#restart-button").on('click', playStarWarsBattlegrounds);
+      }
     }
   }
   function selectNextOpponent() {
