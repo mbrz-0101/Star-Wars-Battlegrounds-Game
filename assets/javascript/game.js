@@ -1,7 +1,8 @@
 function playStarWarsBattlegrounds() {
 
   class Fighter {
-    constructor(name, imgSrc, jedi = true, health = 100, baseAttack = 10, attack = 10, counterAttack = 5) {
+    constructor(varName, name, imgSrc, jedi = true, health = 100, baseAttack = 10, attack = 10, counterAttack = 5) {
+      this.varName = varName;
       this.name = name;
       this.imgSrc = imgSrc;
       this.jedi = jedi;
@@ -12,18 +13,18 @@ function playStarWarsBattlegrounds() {
     }
   }
 
-  const windu = new Fighter("Mace Windu", "assets/images/mace-windu.png");
-  const luke = new Fighter("Luke Skywalker", "assets/images/luke-skywalker.jpg");
-  const obiwan = new Fighter("Obi-wan Kinobi", "assets/images/obi-wan.jpg");
-  const solo = new Fighter("Han Solo", "assets/images/han-solo.jpg");
-  const rey = new Fighter("Rey", "assets/images/rey.jpg");
-  const finn = new Fighter("Finn", "assets/images/finn.jpg");
-  const maul = new Fighter("Darth Maul", "assets/images/darth-maul.jpg", false);
-  const vader = new Fighter("Darth Vader", "assets/images/darth-vader.jpg", false);
-  const palpatine = new Fighter("Emperor Palpatine", "assets/images/emperor-palpatine.jpg", false);
-  const snoke = new Fighter("Dark Lord Snoke", "assets/images/snoke.jpg", false);
-  const kylo = new Fighter("Kylo Ren", "assets/images/kylo-ren.jpg", false);
-  const dooku = new Fighter("Count Dooku", "assets/images/count-dooku.jpg", false);
+  const windu = new Fighter("windu", "Mace Windu", "assets/images/mace-windu.png", true, 50, 5, 5, 2);
+  const luke = new Fighter("luke", "Luke Skywalker", "assets/images/luke-skywalker.jpg", true, 70, 15, 15, 10);
+  const obiwan = new Fighter("obiwan", "Obi-wan Kinobi", "assets/images/obi-wan.jpg", true, 60, 10, 10, 7);
+  const solo = new Fighter("solo", "Han Solo", "assets/images/han-solo.jpg", true, 55, 7, 7, 4);
+  const rey = new Fighter("rey", "Rey", "assets/images/rey.jpg", true, 75, 15, 5, 12);
+  const finn = new Fighter("finn", "Finn", "assets/images/finn.jpg");
+  const maul = new Fighter("maul", "Darth Maul", "assets/images/darth-maul.jpg", false);
+  const vader = new Fighter("vader", "Darth Vader", "assets/images/darth-vader.jpg", false);
+  const palpatine = new Fighter("palpatine", "Emperor Palpatine", "assets/images/emperor-palpatine.jpg", false);
+  const snoke = new Fighter("snoke", "Dark Lord Snoke", "assets/images/snoke.jpg", false);
+  const kylo = new Fighter("kylo", "Kylo Ren", "assets/images/kylo-ren.jpg", false);
+  const dooku = new Fighter("dooku", "Count Dooku", "assets/images/count-dooku.jpg", false);
 
   let charactersObject = {
     "windu": windu,
@@ -78,7 +79,7 @@ function playStarWarsBattlegrounds() {
   }
   function moveCharacterToDefenderSpace(event) {
     defender = charactersObject[$(event.target)[0].id];
-    defenderHistory.push(defender);
+    defenderHistory.push(defender.varName);
     $("#select-opponent-message").text("");
     $("#sith-space").css("border", "none");
     $("#sith-space").css("background-color", "rgba(80, 80, 80, 0)");
@@ -126,7 +127,7 @@ function playStarWarsBattlegrounds() {
     $("#select-opponent-message").css("visibility", "visible");
   }
   function fight() {
-    if (attacker && defender) {
+    if (attacker && defender) {    
       defender.health = defender.health - attacker.attack;
       attacker.health = attacker.health - defender.counterAttack;
       $("#jedi-health-points").text("HP: " + attacker.health);
@@ -145,6 +146,9 @@ function playStarWarsBattlegrounds() {
         $("#battle-log").text("You lose");
         $("#restart-button").show();
         $("#restart-button").on('click', playStarWarsBattlegrounds);
+        if (defenderHistory.length === 6) {
+          alert("You win! refresh the page to pick a new character and play again!");
+        }
       }
     }
   }
@@ -174,6 +178,9 @@ function playStarWarsBattlegrounds() {
       $("#character-selection-section").show();
       $("#jedi-section").show();     
     }
+    defenderHistory.forEach((element) => {
+      $("#"+element).attr("class", "beaten-defenders");
+    });
 
   }
 
