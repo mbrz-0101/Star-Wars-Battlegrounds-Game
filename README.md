@@ -1,5 +1,4 @@
-# Star Wars Battlegrounds
-## HTML,CSS, JS, jQuery
+# Star Wars Battlegrounds - HTML, CSS, JS, jQuery
 
 My second venture into responsive web-browser games was Star Wars Battlegrounds. The player is allowed to pick Sith or Jedi, and fight to the death against the other side with dynamic Health, Attack, and Enemies. 
 
