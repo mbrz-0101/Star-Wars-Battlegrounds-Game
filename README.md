@@ -5,3 +5,4 @@ My second venture into responsive web-browser games was Star Wars Battlegrounds.
 This project allowed me to explore new methods of creating variables, manipulating them on events, and displaying results to the browser window. I also used jQuery to select targets, change styling on events, and let the user choose their own destiny.
 
 Choose your favorite Star Wars character and go play!
+https://mbrz-0101.github.io/Star-Wars-Battlegrounds-Game/
